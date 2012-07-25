@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :require_login, :except => [:index, :show]
-  
+
   def index
     @articles = Article.all
   end
@@ -14,8 +14,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])
-
+    @article = Article.new(:title => params[:article][:title],
+                            :body => [:article][:body]
+                            )
     @article.save
 
     redirect_to article_path(@article)
